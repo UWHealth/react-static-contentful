@@ -1,27 +1,26 @@
-import fetchPosts from './src/contenful/fetchPosts'
+import fetchPosts from "./src/contentful/fetchPosts";
 
 export default {
-
   getSiteData: () => ({
-    title: 'React Static with Contentful CMS',
+    title: "React Static with Contentful CMS",
   }),
   getRoutes: async () => {
-    const posts = await fetchPosts()
-    
+    const posts = await fetchPosts();
+
     return [
       {
-        path: '/blog',
+        path: "/blog",
         getData: () => ({
-          posts
+          posts,
         }),
         children: posts.map(post => ({
           path: `/post/${post.slug}`,
-          component: 'src/components/Post',
+          component: "src/components/Post",
           getData: () => ({
             post,
           }),
         })),
       },
-    ]
+    ];
   },
-}
+};
